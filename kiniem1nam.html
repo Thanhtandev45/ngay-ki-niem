@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>TÂN × ÁI TRÂN — The Chronicle of Us</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&family=Caveat:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#07080D;--night:#111524;--plum:#24162D;--wine:#501D36;--rose:#9C617D;--gold:#D6B887;--ivory:#EDE4DF;--mute:#8F95A7;
+--serif:"Cormorant Garamond",Georgia,"Times New Roman",serif;--sans:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;--hand:Caveat,"Segoe Script",cursive}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ivory);font-family:var(--sans);font-weight:300;line-height:1.8;font-size:17px;overflow-x:hidden}
+.ch{min-height:100vh;min-height:100svh;padding:12vh 6vw;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;position:relative}
+.ch>*{max-width:720px;width:100%}
+.act{font-size:11px;letter-spacing:.4em;color:var(--gold);text-transform:uppercase;margin-bottom:1rem}
+.date{font-family:var(--serif);font-size:clamp(2.4rem,9vw,5rem);color:var(--gold);line-height:1.1}
+h2{font-family:var(--serif);font-weight:400;font-size:clamp(1.7rem,5.5vw,3.2rem);line-height:1.2;margin:.6rem 0 .4rem;letter-spacing:.03em}
+.vi{font-style:italic;color:var(--rose);font-family:var(--serif);font-size:1.25rem;margin-bottom:1.5rem}
+.body p{margin:0 0 1.15rem;color:#d9d0cc}
+.rv{opacity:0;transform:translateY(24px);transition:opacity 1.1s,transform 1.1s}
+.rv.in{opacity:1;transform:none}
+.btn{display:inline-block;margin-top:1.4rem;padding:.85rem 1.6rem;min-height:44px;border:1px solid var(--gold);color:var(--gold);background:transparent;font:inherit;font-size:12px;letter-spacing:.25em;text-transform:uppercase;cursor:pointer;border-radius:2px;transition:.4s}
+.btn:hover,.btn:focus-visible{background:var(--gold);color:var(--bg);outline:none}
+.btn.soft{border-color:#444a5e;color:var(--mute)}
+.frame{width:min(100%,520px);aspect-ratio:4/5;margin:1.5rem auto;border-radius:3px;overflow:hidden;position:relative;background:linear-gradient(160deg,var(--plum),var(--night) 60%,var(--wine));box-shadow:0 30px 80px #000a,0 0 0 1px #ffffff12;display:flex;align-items:center;justify-content:center;cursor:zoom-in}
+.frame.wide{aspect-ratio:16/10}
+.frame img{width:100%;height:100%;object-fit:cover;display:none}
+.frame.has img{display:block}
+.frame.has .ph{display:none}
+.ph{font-family:var(--serif);font-size:1.4rem;color:var(--rose);letter-spacing:.2em;text-transform:uppercase;padding:1rem;text-align:center;opacity:.8}
+.ph small{display:block;font-size:.7rem;letter-spacing:.3em;color:var(--mute);margin-top:.5rem;font-family:var(--sans)}
+/* intro */
+#intro{background:radial-gradient(ellipse at 50% 60%,var(--night),var(--bg) 70%)}
+#sig{width:min(90%,520px);height:120px;margin-bottom:1.5rem}
+.dot{fill:var(--gold);opacity:0;animation:pop 2s forwards}
+.dot.b{fill:var(--rose);animation-delay:1.6s}
+.path{stroke:var(--gold);stroke-width:1;fill:none;stroke-dasharray:420;stroke-dashoffset:420;animation:draw 3s 2.8s forwards;opacity:.7}
+@keyframes pop{to{opacity:1}}@keyframes draw{to{stroke-dashoffset:0}}
+#intro h1{font-family:var(--serif);font-weight:400;font-size:clamp(2.2rem,9vw,5rem);letter-spacing:.12em;opacity:0;animation:pop 2s 3.5s forwards}
+.q{font-family:var(--serif);font-style:italic;color:var(--ivory);font-size:1.2rem;margin:1rem 0;opacity:0;animation:pop 2s 4.5s forwards}
+#intro .btn,#intro .hint{opacity:0;animation:pop 2s 5.5s forwards}
+.hint{font-size:.8rem;color:var(--mute);font-style:italic;margin-top:1.6rem}
+.skipfx{position:fixed;top:max(12px,env(safe-area-inset-top));left:12px;z-index:30;font-size:11px;padding:.5rem .8rem;min-height:36px}
+body.fx-off *{animation-duration:.01s!important;animation-delay:0s!important;transition-duration:.01s!important}
+/* act colours */
+.a2{background:linear-gradient(180deg,var(--bg),#14142b)}.a3{background:linear-gradient(180deg,#14142b,var(--plum))}
+.a4{background:linear-gradient(180deg,var(--plum),#17101f)}.a5{background:linear-gradient(180deg,#17101f,#0b0b12)}
+.a6{background:radial-gradient(circle at 50% 40%,var(--wine),var(--bg) 75%)}.a7{background:linear-gradient(180deg,var(--bg),var(--plum))}
+.sig{width:2px;height:90px;background:linear-gradient(var(--gold),transparent);margin:2.5rem auto 0;opacity:.6}
+.pts{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap;margin:1.5rem 0}
+.pt{padding:.7rem 1.2rem;min-height:44px;border:1px solid #ffffff22;background:#ffffff08;color:var(--ivory);font:inherit;cursor:pointer;border-radius:30px}
+.pt:hover,.pt.on{border-color:var(--gold);color:var(--gold)}
+.note{min-height:3.5rem;font-style:italic;color:var(--rose);font-family:var(--serif);font-size:1.2rem}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.8rem;margin:1.5rem 0;max-width:720px}
+.card{padding:1.1rem .8rem;min-height:90px;background:linear-gradient(150deg,#ffffff0d,#ffffff04);border:1px solid #ffffff18;color:var(--ivory);font:inherit;cursor:pointer;border-radius:4px;font-family:var(--serif);font-size:1.1rem;transition:.4s}
+.card:hover{border-color:var(--gold);transform:translateY(-3px)}
+.const{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;margin:1rem 0}
+.const .frame{width:min(100%,200px);aspect-ratio:9/16;cursor:default}
+.const figure{flex:1 1 180px;max-width:220px}.const figcaption{font-size:.8rem;letter-spacing:.25em;color:var(--gold)}
+.lead{font-family:var(--serif);font-size:1.35rem;color:var(--ivory)}
+.wave{display:flex;gap:4px;align-items:center;justify-content:center;height:50px;margin:1rem 0}
+.wave i{width:3px;background:var(--gold);height:10px;border-radius:2px;opacity:.7}
+body.playing .wave i{animation:wv 1.1s ease-in-out infinite}
+.wave i:nth-child(odd){animation-delay:.25s!important}.wave i:nth-child(3n){animation-delay:.5s!important}
+@keyframes wv{50%{height:44px}}
+.goals{list-style:none;text-align:left;margin:1rem 0}
+.goals li{padding:.6rem 0;border-bottom:1px solid #ffffff12;display:flex;gap:.8rem;align-items:center;cursor:pointer}
+.goals li::before{content:"";width:18px;height:18px;border:1px solid var(--gold);border-radius:50%;flex:none}
+.goals li.done::before{background:var(--gold)}.goals li.done{color:var(--mute);text-decoration:line-through}
+.zones{display:grid;gap:1.2rem;text-align:left;margin:1rem 0}
+.zone{border-left:1px solid var(--gold);padding-left:1rem}.zone h3{font-family:var(--serif);font-weight:400;font-size:1.4rem;color:var(--gold)}
+.zone ul{padding-left:1.1rem;color:#cfc6c2;font-size:.95rem}
+.date-big{font-family:var(--serif);font-size:clamp(3rem,13vw,7rem);color:var(--gold);letter-spacing:.05em}
+.dots{display:flex;justify-content:center;gap:2rem;margin:1rem 0}.dots b{width:14px;height:14px;border-radius:50%;background:var(--gold);box-shadow:0 0 30px 8px #d6b88766;animation:glide 4s ease-out both}
+.dots b+b{background:var(--rose);box-shadow:0 0 30px 8px #9c617d66}
+@keyframes glide{from{transform:translateX(-40vw)}}.dots b+b{animation-name:glide2}@keyframes glide2{from{transform:translateX(40vw)}}
+/* letter */
+.env{width:min(100%,380px);aspect-ratio:3/2;background:linear-gradient(160deg,#2a1a30,var(--wine));border:1px solid var(--gold);border-radius:4px;margin:1.5rem auto;display:flex;align-items:center;justify-content:center;font-family:var(--serif);letter-spacing:.3em;color:var(--gold);position:relative;box-shadow:0 20px 60px #000a}
+.paper{background:#efe6dc;color:#2b2326;padding:clamp(1.5rem,6vw,3.5rem);text-align:left;font-family:var(--serif);font-size:1.2rem;line-height:2;border-radius:2px;margin-top:1.5rem;display:none;max-width:720px}
+.paper.open{display:block}
+.paper p{margin-bottom:1.2rem}.paper h3{font-weight:600;font-size:1.5rem;margin-bottom:1.5rem}
+.paper p,.paper h3{opacity:0;animation:pop 1.2s forwards}
+.paper.all p,.paper.all h3{opacity:1;animation:none}
+.sign{font-family:var(--hand);font-size:2rem;color:var(--wine)}
+/* journal */
+.pages{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:.8rem;width:100%;max-width:900px;text-align:left}
+.page{min-height:110px;padding:1rem;border:1px dashed #ffffff33;background:#ffffff06;color:var(--mute);font:inherit;font-size:.95rem;cursor:pointer;border-radius:3px;text-align:left}
+.page.filled{border-style:solid;border-color:var(--gold);color:var(--ivory)}.page small{display:block;color:var(--rose);font-size:.75rem;margin-top:.5rem}
+.tools{display:flex;gap:.6rem;flex-wrap:wrap;justify-content:center}
+.hug{position:fixed;inset:0;pointer-events:none;display:flex;align-items:center;justify-content:center;font-size:5rem;opacity:0;z-index:40}
+.hug.go{animation:hug 2.4s ease-out}
+@keyframes hug{0%{opacity:0;transform:scale(.4);filter:blur(6px)}30%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.8);filter:blur(10px)}}
+.end{padding:8vh 6vw 14vh;text-align:center;font-family:var(--serif);font-size:clamp(1.3rem,4.5vw,2rem);font-style:italic;color:var(--gold)}
+/* modal */
+.modal{position:fixed;inset:0;background:#05060bee;z-index:50;display:none;align-items:center;justify-content:center;padding:max(1rem,env(safe-area-inset-top)) 1rem 1rem;overflow:auto}
+.modal.open{display:flex}
+.mbox{max-width:560px;width:100%;max-height:92vh;overflow:auto;background:linear-gradient(160deg,var(--night),var(--plum));border:1px solid #ffffff22;padding:1.5rem;text-align:left;border-radius:4px}
+.mbox img{max-width:100%;max-height:60vh;display:block;margin:0 auto 1rem;border-radius:2px}
+.mbox h3{font-family:var(--serif);font-weight:400;font-size:1.7rem;margin-bottom:.6rem}
+.mbox input,.mbox textarea{width:100%;margin:.4rem 0;padding:.7rem;background:#00000044;border:1px solid #ffffff22;color:var(--ivory);font:inherit;font-size:16px;border-radius:3px}
+.mbox textarea{min-height:160px}
+.x{float:right;min-width:44px;min-height:44px;background:none;border:0;color:var(--gold);font-size:1.6rem;cursor:pointer}
+#audio{position:fixed;right:max(12px,env(safe-area-inset-right));bottom:max(12px,env(safe-area-inset-bottom));z-index:30;width:46px;height:46px;border-radius:50%;border:1px solid var(--gold);background:#07080dcc;color:var(--gold);font-size:18px;cursor:pointer;display:none}
+#prog{position:fixed;top:0;left:0;height:2px;background:var(--gold);width:0;z-index:60}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation-duration:.01s!important;animation-delay:0s!important;transition-duration:.01s!important}}
+[hidden]{display:none!important}
+.ch{background:none!important}
+.glow{position:fixed;inset:0;z-index:-1;opacity:0;transition:opacity 1.8s}
+#pt{position:fixed;inset:0;z-index:0;pointer-events:none}
+.grain{position:fixed;inset:0;z-index:70;pointer-events:none;opacity:.06;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+#wipe{position:fixed;inset:0;z-index:65;pointer-events:none;transform:translateX(-101%)}
+#chlabel{position:fixed;top:max(14px,env(safe-area-inset-top));left:50%;transform:translateX(-50%);z-index:35;font-size:10px;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);opacity:0;transition:opacity .6s;pointer-events:none;white-space:nowrap;max-width:60vw;overflow:hidden;text-overflow:ellipsis}
+#chlabel.show{opacity:.9}
+body.tabhid *{animation-play-state:paused!important}
+.ch>.beam{position:absolute;max-width:none;height:1px;pointer-events:none;opacity:0;top:0;left:0}
+/* Không dùng clip-path trên chính .frame: phần tử bị cắt hết sẽ không bao giờ "giao" với màn hình nên IntersectionObserver không bao giờ báo, ảnh kẹt ở trạng thái ẩn */
+.frame.rv{filter:blur(6px);transition:filter 1.2s,opacity 1s,transform 1.1s}
+.frame.rv>img,.frame.rv>.ph{clip-path:inset(0 0 100% 0);transition:clip-path 1.2s cubic-bezier(.2,.8,.2,1)}
+.frame.rv.in{filter:none}
+.frame.rv.in>img,.frame.rv.in>.ph{clip-path:inset(0)}
+#freefire .frame img,#flower .frame img{transform:scale(1.3);transition:transform 4s cubic-bezier(.2,.8,.2,1)}
+#freefire .frame.in img,#flower .frame.in img{transform:none}
+h2.rv{transition:opacity .9s,transform .9s}
+/* intro */
+#intro{position:relative;overflow:hidden}
+#intro .stage{position:relative;max-width:720px;min-height:70vh;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.i-dot,.i-ring,.i-line{position:absolute;pointer-events:none;opacity:0}
+.i-dot{left:50%;top:22%;width:8px;height:8px;margin:-4px;border-radius:50%;background:var(--gold);box-shadow:0 0 24px 6px #d6b88777;animation:pop 1.2s .4s forwards}
+.i-ring{left:50%;top:22%;width:20px;height:20px;margin:-10px;border:1px solid var(--gold);border-radius:50%;animation:ring 2.2s 1.4s ease-out forwards}
+@keyframes ring{0%{opacity:.8;transform:scale(1)}100%{opacity:0;transform:scale(60)}}
+.i-line{top:22%;left:-10%;width:30%;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);animation:sweep 1.6s 2s ease-in-out forwards}
+@keyframes sweep{0%{opacity:0;transform:translateX(0)}20%{opacity:1}100%{opacity:0;transform:translateX(420%)}}
+.mask{display:block;overflow:hidden}.mask>span{display:block;transform:translateY(110%);animation:up 1.1s var(--d,0s) cubic-bezier(.2,.8,.2,1) forwards}
+@keyframes up{to{transform:none}}
+.fi{opacity:0;animation:pop 1.4s var(--d,0s) forwards}
+.i-names{display:flex;align-items:center;justify-content:center;gap:.8rem;font-family:var(--serif);font-size:clamp(1.8rem,8vw,4.2rem);letter-spacing:.1em;margin-top:1.4rem;flex-wrap:wrap}
+.i-names .l,.i-names .r,.i-names .x{opacity:0;animation-duration:1.2s;animation-timing-function:cubic-bezier(.2,.8,.2,1);animation-fill-mode:forwards}
+.i-names .l{animation-name:inl;animation-delay:4.6s}.i-names .r{animation-name:inr;animation-delay:4.6s}.i-names .x{animation-name:pop;animation-delay:5.3s;color:var(--gold)}
+@keyframes inl{from{opacity:0;transform:translateX(-40px)}to{opacity:1;transform:none}}
+@keyframes inr{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:none}}
+.i-rule{height:1px;width:0;background:var(--gold);margin:1rem auto;animation:grow 1.2s 5.3s forwards}
+@keyframes grow{to{width:min(60%,260px)}}
+#intro.skip *{animation-duration:.01s!important;animation-delay:0s!important}
+.isk{position:absolute;top:max(12px,env(safe-area-inset-top));right:12px;margin:0;padding:.5rem .9rem;font-size:11px;z-index:3}
+/* timeline + kinetic */
+.tl{position:relative;width:100%;max-width:560px;text-align:left;padding-left:2rem;margin:1rem auto}
+.tl::before{content:"";position:absolute;left:6px;top:0;bottom:0;width:1px;background:#ffffff1f}
+.tlf{position:absolute;left:6px;top:0;width:1px;height:0;background:linear-gradient(var(--gold),var(--rose));box-shadow:0 0 10px var(--gold)}
+.tn{position:relative;padding:.4rem 0 1.6rem;opacity:.25;transition:opacity .8s,transform .8s;transform:translateX(10px)}
+.tn::before{content:"";position:absolute;left:-2rem;top:.9rem;width:13px;height:13px;border-radius:50%;background:var(--bg);border:1px solid var(--gold)}
+.tn.on{opacity:1;transform:none}.tn.on::before{background:var(--gold);box-shadow:0 0 14px var(--gold)}
+.tn b{display:block;font-family:var(--serif);font-weight:400;color:var(--gold);font-size:1.3rem}.tn.big b{font-size:1.9rem}
+.kn{font-family:var(--serif);font-size:clamp(2.2rem,10vw,5.5rem);line-height:1.15;margin:.3rem 0}
+/* player */
+#mp{position:fixed;right:max(12px,env(safe-area-inset-right));bottom:max(12px,env(safe-area-inset-bottom));z-index:45}
+#mp.na{display:none}
+.mpb{width:48px;height:48px;border-radius:50%;border:1px solid var(--gold);background:#07080dbb;backdrop-filter:blur(6px);color:var(--gold);cursor:pointer;font-size:18px;position:relative}
+body.playing .mpb::after{content:"";position:absolute;inset:-1px;border-radius:50%;border:1px solid var(--gold);animation:ring2 2.4s ease-out infinite}
+@keyframes ring2{from{opacity:.7;transform:scale(1)}to{opacity:0;transform:scale(1.8)}}
+.mpp{position:absolute;right:0;bottom:58px;width:min(300px,calc(100vw - 24px));padding:1rem;background:#0d0e18f2;border:1px solid #d6b88755;border-radius:14px;transform-origin:100% 100%;transform:scale(.6) translateY(20px);opacity:0;pointer-events:none;transition:.35s cubic-bezier(.2,.8,.2,1)}
+#mp.open .mpp{transform:none;opacity:1;pointer-events:auto}
+.mpt{font-family:var(--serif);letter-spacing:.2em;color:var(--gold)}.mps{font-size:.8rem;color:var(--mute)}
+.mpr{display:flex;align-items:center;gap:.5rem;margin:.4rem 0}.mpr input{flex:1;accent-color:var(--gold);min-width:0}
+.mpc{width:44px;height:44px;border-radius:50%;border:1px solid var(--gold);background:none;color:var(--gold);cursor:pointer;flex:none}.mpc.sm{width:36px;height:36px}
+.mpd{display:flex;justify-content:space-between;font-size:.75rem;color:var(--mute)}
+.mpw{display:flex;gap:3px;height:24px;align-items:center;margin:.6rem 0}.mpw i{width:2px;height:5px;background:var(--gold);border-radius:1px}
+body.playing .mpw i{animation:wv2 1.1s ease-in-out infinite}.mpw i:nth-child(odd){animation-delay:.3s!important}.mpw i:nth-child(3n){animation-delay:.6s!important}
+@keyframes wv2{50%{height:22px}}
+body.playing .ring-p::after{content:"";position:absolute;inset:0;border:1px solid var(--gold);border-radius:3px;animation:ring2 3s ease-out infinite}
+/* letter */
+.stage3{perspective:900px;margin:1.5rem auto;width:min(100%,380px)}
+.envx{position:relative;aspect-ratio:3/2;background:linear-gradient(160deg,#2a1a30,var(--wine));border:1px solid var(--gold);border-radius:4px;box-shadow:0 20px 60px #000a}
+.envx .sheet{position:absolute;left:8%;right:8%;top:8%;bottom:8%;background:#efe6dc;transition:transform .9s .5s cubic-bezier(.2,.8,.2,1)}
+.envx .flap{position:absolute;left:0;right:0;top:0;height:55%;background:linear-gradient(#3a2036,var(--wine));clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top;transition:transform .8s cubic-bezier(.4,0,.2,1);z-index:2}
+.envx .lbl{position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:center;padding-bottom:10%;z-index:3;letter-spacing:.3em;color:var(--gold);font-family:var(--serif);transition:opacity .4s}
+.envx.open .flap{transform:rotateX(180deg);z-index:0}.envx.open .sheet{transform:translateY(-45%)}.envx.open .lbl{opacity:0}
+#reader{position:fixed;inset:0;z-index:55;background:#07080df5;display:none;flex-direction:column}
+#reader.open{display:flex;animation:rd .6s cubic-bezier(.2,.8,.2,1)}
+@keyframes rd{from{opacity:0;transform:translateY(30px)}}
+.rbar{display:flex;gap:.5rem;justify-content:flex-end;flex-wrap:wrap;padding:max(.6rem,env(safe-area-inset-top)) .8rem .6rem;border-bottom:1px solid #ffffff12}
+.rbar .btn{margin:0;padding:.5rem .9rem;font-size:11px}
+.rscroll{flex:1;overflow:auto;padding:1.5rem 1rem 4rem;-webkit-overflow-scrolling:touch}
+.rscroll .paper{display:block;margin:0 auto}.rend{text-align:center;margin-top:2rem}
+/* finale */
+.reprise{width:min(100%,520px);height:auto;margin:1rem auto}
+.reprise .t{opacity:0;animation:pop 1.2s var(--d,0s) forwards;animation-play-state:paused}
+.hz{stroke-dasharray:600;stroke-dashoffset:600;animation:draw2 4s 3.2s forwards;animation-play-state:paused}
+@keyframes draw2{to{stroke-dashoffset:0}}
+#finale.go .t,#finale.go .hz{animation-play-state:running}
+.blank{width:min(100%,360px);margin:2rem auto;padding:2.2rem 1.4rem;background:#efe6dc;color:#2b2326;font-family:var(--serif);font-size:1.4rem;font-style:italic;border-radius:2px;transform:rotate(-1deg);box-shadow:0 30px 60px #000a}
+</style>
+</head>
+<body>
+<div id="prog"></div>
+<button class="btn soft skipfx" id="skipfx" type="button">Bỏ qua hiệu ứng</button>
+<div id="wipe"></div><div class="glow" id="glowA"></div><div class="glow" id="glowB"></div><canvas id="pt"></canvas><div id="chlabel"></div><div class="grain"></div>
+<div class="hug" id="hug" aria-hidden="true">💗</div>
+<main id="main"></main>
+<div class="modal" id="modal" role="dialog" aria-modal="true"><div class="mbox"><button class="x" id="mx" type="button" aria-label="Đóng">×</button><div id="mc"></div></div></div>
+<audio id="bgm" preload="none" loop></audio>
+
+<script>
+"use strict";
+/* ============ 1. CONFIG ============ */
+const SITE_CONFIG = {
+  names: "TÂN × ÁI TRÂN",
+  dates: { met: "22.10.2025", official: [2026, 8, 15], officialLabel: "15.09.2026", anniv: "22.10.2026" },
+  discordDate: "",            // chỉ điền "27.10.2025" khi Tân xác nhận
+  returnLabel: "THÁNG 07.2026",
+  music: "music.mp3",
+  img: p => "image" + p + ".jpg",
+  /* Muốn dùng tên file tùy ý? Điền vào đây, ví dụ: flower: "hoa-sinh-nhat.jpg", freefire: "images/ff.png"
+     Các khóa: freefire, discord, zalo, mess, instagram, tiktok, locket, phone, portrait, flower, memory-01..04 */
+  photos: {},
+  memoryImages: ["memory-01", "memory-02", "memory-03", "memory-04"],
+  storeKey: "eternal-chronicle-journal-v1",
+  /* Tân có thể điền thêm kỷ niệm thật vào các trường extra */
+  chapters: [
+    { id: "freefire", act: "Hồi I · The First Signal", date: "22.10.2025", title: "BEFORE WE KNEW", vi: "Ngày một trận game trở thành điểm khởi đầu", img: "freefire", wide: true, bg: "a2", btn: "Nhìn lại điểm khởi đầu",
+      body: ["Anh không biết hôm ấy sẽ trở thành một ngày đáng nhớ khi mình bước vào trận game ấy", "Anh cũng không biết người ở phía bên kia màn hình rồi sẽ trở thành một người mà anh muốn dành riêng một góc trong câu chuyện của mình", "Lúc đó, chúng ta chỉ mới gặp nhau qua một trò chơi. Chưa có lời hứa, chưa có danh phận, cũng chưa thể biết những tháng ngày sau này sẽ đưa cả hai đến đâu", "Nhưng khi nhìn lại, anh nhận ra câu chuyện của chúng ta đã có một nơi để bắt đầu"] },
+    { id: "discord", act: "Hồi I · The Thread Between Us", date: "", title: "THE GAME ENDED. THE CONNECTION DIDN'T.", vi: "Discord — khi chúng ta thân hơn", img: "discord", bg: "a2", extra: "", btn: "Mở mảnh nhật ký",
+      body: ["Vài ngày sau khi đã thân hơn, chúng ta kết bạn Discord", "Nếu Free Fire là nơi lần đầu hai người gặp nhau, thì Discord là một dấu nối tiếp theo, nơi sự quen biết có thể tiếp tục sau khi trận game đã qua", "Anh không muốn phóng đại rằng mình đã biết trước câu chuyện sẽ đi xa đến đâu. Anh chỉ muốn giữ lại điều giản dị ấy: cuộc gặp của chúng ta đã không dừng lại ở một trận game"] },
+    { id: "zalo", act: "Hồi I · The Memory Channels", date: "", title: "SOME CONVERSATIONS STAY", vi: "Zalo — một kiểu hiện diện khác", img: "zalo", bg: "a3",
+      body: ["Rồi câu chuyện của chúng ta tiếp tục đi qua những cuộc trò chuyện khác", "Có những nền tảng chỉ là nơi nhắn tin, nhưng khi nhìn lại, chúng có thể gợi nhớ cả một giai đoạn của cuộc đời", "Anh không cần phải nhớ chính xác từng ngày mình đã nói gì. Anh chỉ muốn giữ lại dấu vết rằng trong những tháng ngày ấy, chúng ta đã từng dành thời gian để hiểu thêm về nhau"] },
+    { id: "mess", act: "Hồi I · The Memory Channels", date: "", title: "STILL FINDING OUR WAY TO EACH OTHER", vi: "Messenger — những cuộc trò chuyện tiếp tục", img: "mess", bg: "a3", wide: true,
+      body: ["Những cuộc trò chuyện tiếp tục xuất hiện trong cuộc sống của chúng ta, ở những thời điểm khác nhau và trong những tâm trạng khác nhau", "Có khi là chuyện vui, có khi chỉ là những lời hỏi han bình thường, cũng có khi là những điều cần được nói rõ hơn", "Điều làm nên câu chuyện của chúng ta không phải là nền tảng đã dùng, mà là việc cả hai đã có những lần tiếp tục trò chuyện thay vì để mọi thứ chỉ dừng lại ở cuộc gặp đầu tiên"] }
+  ],
+  social: [
+    ["INSTAGRAM", "instagram", "Sự hiện diện của nhau tiếp tục xuất hiện trong những không gian khác nhau của đời sống số."],
+    ["TIKTOK", "tiktok", "Một khung hình dọc nhỏ — nơi những khoảnh khắc đi ngang qua nhau."],
+    ["LOCKET", "locket", "Một khung hình dành cho khoảnh khắc được chia sẻ."]
+  ],
+  small: [
+    ["Tin nhắn buổi sáng", "buổi sáng vui vẻ. Câu này là câu huyền thoại của tui mà em trân chọc nói đúng là trai IT được lập trình sẵn mà quá nhạt nhẽo, nhưng em thích vậy. Anh mà sáng sớm không nhắn cho em là em quậy banh chành luôn áaaaa."],
+    ["Một cuộc gọi", "Đôi khi điều đáng nhớ là được nghe giọng người kia, chứ không phải một chủ đề thật đặc biệt."],
+    ["Những lần chơi game", "Trận Free Fire đầu tiên là điểm mở đầu; những lần về sau là cơ hội để hai người tạo thêm ký ức."],
+    ["Những lúc Trân làm nũng", "Những câu “hứ”, “hớ”, ừm ừ ờ, em giận anh luôn, em đánh anh bây giờ á, thế không định hun em saooo, ĐỒ Tồiiiiiiii, VÔ TÂM KÌA, chào anh trai lạnh lùng nha - những lần trêu chọc và những lúc thích được dỗ dành — đáng yêu theo cách rất riêng."],
+    ["Những câu hỏi nhỏ", "“Anh giận hả?” “Anh hết thương rồi hả?”, anh lại đói rồi hả, chủ ngữ anh đâu, sao lại nói chuyện với em thế này  — những câu hỏi đáng được trả lời bằng sự dịu dàng và tôn trọng."],
+    ["Những lần cần nói chuyện", "Khi một người thấy có điều khác thường, điều cần nhất là được giải thích rõ ràng và được lắng nghe."],
+    ["Những lời hứa được giữ lại", "Một phong bì dành cho những lời hứa mà Tân sẽ bổ sung sau — không viết sẵn điều chưa nói."],
+    ["Sau cuộc gọi, anh ghi chú lại những gì chúng ta vừa nói", "Có những điều nếu không viết xuống, có lẽ một ngày nào đó mình chỉ còn nhớ được cảm giác mà không còn nhớ rõ khoảnh khắc. Anh muốn giữ lại những điều nhỏ ấy, vì anh biết thời gian sẽ tiếp tục trôi qua."]
+  ],
+  sides: [
+    ["Dịu dàng", "Sự nhạy cảm, bất an, dễ xúc động, thích được quan tâm — và những điều nhỏ khiến em vui."],
+    ["Sáng tạo", "Hát, vẽ và thiết kế hình xăm."],
+    ["Tài năng Bảo vệ và Chiếm hữu", "Một ít tiếng Trung, ngôn ngữ ký hiệu mã morse, nút thắt cắm trại, trò chơi, em vốn rất sợ những thứ kinh dị tay chân dài nhưng khi chơi game lúc nào em cũng đi trước để bảo vệ mình(chỉ có em mới được phép bắt nạt anh thôi)."],
+    ["Những chuyện thường ngày", "Những lúc nấu ăn, trò chuyện, làm nũng, chơi game — cuộc sống thường ngày của em."]
+  ],
+  goals: ["Học tập và hoàn thiện chuyên môn", "Xây dựng sản phẩm thực tế", "Phát triển kỹ năng backend và bảo mật", "Tìm kiếm cơ hội nghề nghiệp", "Trưởng thành trong cách giao tiếp", "Có trách nhiệm hơn với bản thân và gia đình"],
+  unwritten: ["Kỷ niệm tiếp theo", "Một ngày bình thường đáng nhớ", "Một trò chơi đã cùng nhau khám phá", "Một bức ảnh mới", "Một điều mới Tân học được về Trân", "Một điều mới Trân học được về Tân", "Một lời hứa đã được thực hiện", "Một lần giải quyết hiểu lầm bằng sự trưởng thành", "Một cột mốc học tập hoặc công việc đáng tự hào", "Một lần gặp gỡ hoặc chuyến đi, khi hoàn cảnh cho phép", "Một lá thư gửi chính mình năm sau"],
+  letter: `Em à,
+Hôm nay anh muốn dành cho chúng ta một điều gì đó có thể được giữ lại lâu hơn một tin nhắn hay một lời chúc thông thường
+Không phải vì anh nghĩ rằng một website có thể nói thay tất cả tình cảm của mình, mà bởi anh muốn tạo ra một nơi để sau này, khi thời gian trôi qua, chúng ta vẫn có thể quay lại và nhớ rằng câu chuyện này đã bắt đầu như thế nào
+Ngày 22 tháng 10 năm 2025, anh gặp em lần đầu trong một trận Free Fire. Lúc đó, anh chưa thể biết rằng người ở phía bên kia màn hình rồi sẽ trở thành một người quan trọng trong câu chuyện của mình
+Chúng ta chỉ mới gặp nhau qua một trò chơi, rồi sau vài ngày thân thiết hơn, câu chuyện ấy tiếp tục bằng những cuộc trò chuyện trên Discord và những nền tảng khác
+Chúng ta đã có những lúc vui, những cuộc trò chuyện thú vị, những lần chơi game, những lúc được nghe giọng nhau và những điều nhỏ bé mà có lẽ chẳng ai khác hiểu hết ý nghĩa
+Nhưng anh cũng biết câu chuyện của chúng ta không phải lúc nào cũng dễ dàng. Đã có những giai đoạn chưa rõ ràng, những chuyện khiến cả hai phải suy nghĩ và những khoảng cách mà khi ấy chúng ta chưa biết cách vượt qua
+Anh không muốn dùng món quà này để trách em hay để tự kể mình như một người chưa từng mắc sai lầm. Anh chỉ muốn nhìn lại mọi chuyện bằng sự trưởng thành hơn, bởi những điều đã qua là một phần của hành trình giúp chúng ta hiểu thêm về nhau và về chính mình
+Anh vẫn nhớ rằng sau những khoảng cách ấy, chúng ta lại có cơ hội nói chuyện, hiểu nhau thêm và bước đến một mốc mới. Ngày 15 tháng 9 năm 2026, chúng ta chính thức trở thành người yêu. Với anh, ngày ấy có một ý nghĩa riêng: nó không phải lời đảm bảo rằng từ nay mọi chuyện sẽ hoàn hảo, mà là một điểm bắt đầu rõ ràng hơn để chúng ta cùng xây dựng điều mình mong muốn
+Cục vàng à, anh biết em là một cô gái rất để tâm đến những điều nhỏ bé. Em có thể nhớ những câu nói, những lần anh làm em vui, những lúc em buồn và cả những lời hứa mà em không muốn chúng bị quên đi
+Anh không biết mình đã hiểu hết những điều em cảm nhận hay chưa. Nhưng anh muốn em biết rằng anh không xem cảm xúc của em là điều phiền phức chỉ vì đôi khi em nhạy cảm hơn một chút
+Em không cần lúc nào cũng phải vui vẻ, không cần giấu đi mọi điều khiến mình buồn và cũng không cần trở thành một người hoàn hảo để xứng đáng được yêu thương
+Anh biết bản thân mình cũng còn nhiều điều phải học. Anh có những lúc cần bình tĩnh hơn, cần nói rõ ràng hơn và cần biết lắng nghe trước khi phản ứng. Anh không thể hứa rằng anh sẽ chẳng bao giờ khiến em buồn
+Nhưng anh mong rằng khi có điều gì không ổn, chúng ta có thể nói ra sớm hơn, chịu khó nghe nhau hơn và cùng tìm cách giải quyết thay vì để cả hai phải tự đoán những gì người kia đang nghĩ
+Anh không muốn em phải thu nhỏ thế giới của mình chỉ để chứng minh rằng em thương anh. Anh muốn em tiếp tục có những niềm vui riêng, những người bạn, những sở thích, những điều em muốn học và những ước mơ em muốn theo đuổi
+Anh cũng muốn mình tiếp tục trưởng thành, học tập tốt hơn, phát triển năng lực chuyên môn và xây dựng cuộc đời bằng chính khả năng của mình. Anh có gia đình mà anh muốn chăm lo, có những mục tiêu phải cố gắng và có nhiều điều cần thời gian để hoàn thành. Anh muốn những lời mình nói về tương lai sẽ dần được chứng minh bằng hành động trong hiện tại
+Nếu em đồng hành cùng anh trên hành trình ấy, anh sẽ rất trân trọng. Và anh cũng mong mình có thể đồng hành với em khi em theo đuổi những điều có ý nghĩa đối với riêng em
+Anh không muốn tình yêu trở thành một nơi mà một người phải hy sinh tất cả thế giới riêng để giữ người còn lại. Anh muốn hai đứa mình có thể tiến về phía trước, nhưng vẫn là hai con người có ước mơ, có giới hạn và có quyền trưởng thành theo cách của mình
+Anh vẫn nhớ bó hoa anh tặng em vào dịp sinh nhật vừa rồi, bó hoa đầu tiên em nhận từ bạn trai, cùng câu “I Love You 3000” mà em đã đăng. Có thể một bó hoa không thể nói thay hết mọi điều, nhưng anh hy vọng đó là một trong những khoảnh khắc nhỏ mà nhiều năm sau chúng ta vẫn có thể nhớ lại và mỉm cười
+Một mối quan hệ không chỉ được tạo nên bởi một vài ngày đặc biệt. Nó còn được xây dựng bằng những điều lặp lại mỗi ngày: cách chúng ta lắng nghe, cách chúng ta tôn trọng nhau và cách chúng ta chịu trách nhiệm cho những gì mình nói và làm
+Hôm nay là ngày tròn một năm kể từ lần đầu chúng ta gặp nhau. Điều đó không có nghĩa là chúng ta đã biết hết về nhau, cũng không có nghĩa câu chuyện đã đi đến một kết thúc hoàn chỉnh. Phía trước vẫn còn rất nhiều điều phải tìm hiểu, nhiều thay đổi mà cả hai chưa thể biết trước và những ký ức mà hiện tại chúng ta chưa có cơ hội tạo ra
+Anh hy vọng nếu một ngày nào đó chúng ta quay lại trang web này, nó sẽ không chỉ còn là nơi lưu giữ những bức ảnh cũ và những lời viết hôm nay, mà sẽ có thêm những kỷ niệm mới, những mục tiêu được hoàn thành, những cuộc trò chuyện đã giúp hai đứa hiểu nhau hơn
+Anh không muốn viết sẵn đoạn kết của câu chuyện. Anh chỉ muốn dành cho hiện tại một chỗ để được nhớ đến và dành cho tương lai một khoảng trống để những điều tốt đẹp có cơ hội xuất hiện
+Cảm ơn em vì đã trở thành một phần trong hành trình của anh
+Chúc mừng một năm kể từ ngày chúng ta gặp nhau, cục vàng của anh
+Và nếu ngày ấy là nơi câu chuyện bắt đầu, anh hy vọng hôm nay chỉ là một trong rất nhiều lần sau này chúng ta còn quay lại đây, mỉm cười và viết tiếp những điều đang chờ ở phía trước…`
+};
+
+/* ============ 2. HELPERS ============ */
+const $ = (s, r = document) => r.querySelector(s);
+const h = (tag, cls, text, kids) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text) e.textContent = text; (kids || []).forEach(k => e.appendChild(k)); return e; };
+const main = $("#main");
+const safeStore = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { localStorage.setItem(k, v); return true; } catch (e) { return false; } } };
+
+/* ============ 3. IMAGES (asset drop-in) ============ */
+/* Lỗi cũ: ảnh vừa bị display:none vừa loading="lazy" nên trình duyệt không bao giờ tải ảnh -> onload không chạy -> ảnh không hiện.
+   Cách sửa: tự tải ảnh bằng JS (không lazy), thử lần lượt nhiều tên/đuôi file, chỉ hiện khung ảnh khi tải xong. */
+const IMG_EXTS = ["jpg", "jpeg", "png", "webp", "JPG", "JPEG", "PNG"];
+function imgCandidates(name) {
+  const manual = SITE_CONFIG.photos && SITE_CONFIG.photos[name];
+  if (manual) return [].concat(manual);               // tên file Tân tự điền trong SITE_CONFIG.photos
+  const base = SITE_CONFIG.img(name).replace(/\.[a-z]+$/i, ""), out = [];
+  [base, name, "images/" + name, "images/" + base].forEach(b => IMG_EXTS.forEach(x => out.push(b + "." + x)));
+  return out.filter((v, i, a) => a.indexOf(v) === i);
+}
+const imgIO = "IntersectionObserver" in window ? new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) { imgIO.unobserve(e.target); if (e.target._load) e.target._load(); }
+}), { rootMargin: "900px 0px" }) : null;
+function frame(name, label, wide) {
+  const f = h("div", "frame" + (wide ? " wide" : ""));
+  const ph = h("div", "ph", label, [h("small", "", "image" + name + ".jpg")]);
+  f.appendChild(ph);
+  const list = imgCandidates(name);
+  f._load = () => {
+    if (f._started) return; f._started = 1;
+    let i = 0; const img = new Image(); img.alt = label; img.decoding = "async";
+    img.onload = () => { f.prepend(img); f.dataset.src = img.src; f.classList.add("has"); };
+    img.onerror = () => { if (++i < list.length) img.src = list[i]; };
+    img.src = list[0];
+  };
+  if (imgIO) imgIO.observe(f); else f._load();
+  return f;
+}
+/* ============ 4. MODAL ============ */
+const modal = $("#modal"), mc = $("#mc");
+function openModal(nodes) { mc.replaceChildren(...nodes); modal.classList.add("open"); document.body.style.overflow = "hidden"; }
+function closeModal() { modal.classList.remove("open"); document.body.style.overflow = ""; }
+$("#mx").onclick = closeModal;
+modal.addEventListener("click", e => { if (e.target === modal) closeModal(); });
+document.addEventListener("keydown", e => { if (e.key === "Escape") closeModal(); });
+function zoom(f, title, text) {
+  const n = [];
+  if (f.dataset.src) { const i = new Image(); i.src = f.dataset.src; i.alt = title; n.push(i); }
+  n.push(h("h3", "", title)); if (text) n.push(h("p", "", text));
+  openModal(n);
+}
+/* ============ 5. CHAPTERS ============ */
+function section(id, bg, act) { const s = h("section", "ch " + (bg || ""), "", []); s.id = id; if (act) s.appendChild(h("div", "act", act)); main.appendChild(s); return s; }
+function head(s, date, title, vi) { if (date) s.appendChild(h("div", "date rv", date)); s.appendChild(h("h2", "rv", title)); if (vi) s.appendChild(h("div", "vi rv", vi)); }
+function body(s, arr, cls) { const b = h("div", "body rv " + (cls || "")); arr.forEach(t => b.appendChild(h("p", "", t))); s.appendChild(b); }
+
+function buildIntro() {
+  const s = section("intro"), st = h("div", "stage");
+  st.innerHTML = '<i class="i-dot"></i><i class="i-ring"></i><i class="i-line"></i>';
+  const mk = (cls, txt, d) => { const e = h("div", cls + " mask"), sp = h("span", "", txt); sp.style.setProperty("--d", d); e.appendChild(sp); return e; };
+  const fi = (tag, cls, txt, d) => { const e = h(tag, cls + " fi", txt); e.style.setProperty("--d", d); return e; };
+  st.append(mk("date", "22.10.2025", "3s"), mk("act", "THE DAY WE MET", "3.7s"));
+  st.appendChild(h("div", "i-names", "", [h("span", "l", "TÂN"), h("span", "x", "×"), h("span", "r", "ÁI TRÂN")]));
+  st.appendChild(h("div", "i-rule"));
+  st.appendChild(fi("p", "vi", "The Chronicle of Us", "5.8s"));
+  const hn = fi("p", "hint needmusic", "Có một giai điệu anh muốn dành cho hành trình này", "6.2s"); hn.hidden = true; st.appendChild(hn);
+  const go = fi("button", "btn", "Bắt đầu hành trình", "6.4s"); go.type = "button";
+  go.onclick = () => wipe("#D6B887", () => jump($("#freefire")));
+  const mu = fi("button", "btn soft needmusic", "Bật nhạc", "6.6s"); mu.type = "button"; mu.hidden = true;
+  mu.onclick = () => { playAudio(); wipe("#9C617D", () => jump($("#freefire"))); };
+  const row = h("div", "tools", "", [go, mu]); st.appendChild(row);
+  const sk = h("button", "btn soft isk", "Bỏ qua"); sk.type = "button"; sk.onclick = () => s.classList.add("skip");
+  s.append(st, sk);
+}
+function buildTimeline() {
+  const s = section("timeline", "a7", "Dấu vết kết nối");
+  head(s, "", "MỘT NĂM, TỪNG DẤU MỐC");
+  const tl = h("div", "tl rv"); tl.appendChild(h("div", "tlf"));
+  const D = SITE_CONFIG.dates;
+  [[D.met, "Lần đầu gặp nhau — Free Fire", 1], [SITE_CONFIG.discordDate || "Vài ngày sau", "Kết bạn Discord"], ["", "Zalo → Messenger"], ["", "Instagram → TikTok → Locket"], ["", "Điện thoại và những cuộc gọi"], [SITE_CONFIG.returnLabel, "Tìm lại nhau"], [D.officialLabel, "Chính thức yêu nhau", 1], [D.anniv, "Một năm kể từ ngày gặp nhau", 1]]
+    .forEach(([d, t, big]) => { const n = h("div", "tn" + (big ? " big" : "")); if (d) n.appendChild(h("b", "", d)); n.appendChild(h("span", "", t)); tl.appendChild(n); });
+  s.appendChild(tl);
+}
+function buildKinetic() {
+  const s = section("kinetic", "a5", "");
+  ["WE MET", "WE CHANGED", "WE CHOSE TO CONTINUE"].forEach((t, i) => { const e = h("div", "rv kn", t); e.style.transitionDelay = (i * 1.3) + "s"; if (i === 2) e.style.color = "var(--gold)"; s.appendChild(e); });
+}
+function buildChapter(c) {
+  const s = section(c.id, c.bg, c.act);
+  const dateTxt = c.id === "discord" ? (SITE_CONFIG.discordDate || "VÀI NGÀY SAU") : c.date;
+  head(s, dateTxt, c.title, c.vi);
+  const f = frame(c.img, c.vi.split("—")[0].trim(), c.wide); f.classList.add("rv"); s.appendChild(f);
+  f.onclick = () => zoom(f, c.title, c.extra || c.body[0]);
+  body(s, c.body);
+  if (c.btn) { const b = h("button", "btn", c.btn); b.type = "button"; b.onclick = () => zoom(f, c.title, c.extra || "Chỗ này dành cho một mảnh ký ức thật mà Tân sẽ viết thêm. " + c.body[0]); s.appendChild(b); }
+  s.appendChild(h("div", "sig"));
+}
+function buildSocial() {
+  const s = section("social", "a3", "Hồi I · The Social Constellation");
+  head(s, "", "INSTAGRAM → TIKTOK → LOCKET", "Chòm sao ba điểm sáng");
+  const w = h("div", "const rv");
+  SITE_CONFIG.social.forEach(([n, img, t]) => { const f = frame(img, n); const fig = h("figure", "", "", [f, h("figcaption", "", n)]); f.onclick = () => zoom(f, n, t); w.appendChild(fig); });
+  s.appendChild(w);
+  body(s, ["Những nền tảng ấy có thể thay đổi theo thời gian, nhưng điều anh muốn giữ lại không phải là danh sách ứng dụng mình đã dùng", "Anh muốn giữ lại những khoảnh khắc mà qua chúng, chúng ta đã có cơ hội bước gần hơn vào thế giới của nhau"]);
+}
+function buildPhone() {
+  const s = section("phone", "a4", "Hồi I · The Voice That Feels Closer");
+  head(s, "", "BEYOND THE SCREEN", "Điện thoại và âm nhạc");
+  const wv = h("div", "wave rv"); for (let i = 0; i < 17; i++) wv.appendChild(h("i")); s.appendChild(wv);
+  s.appendChild(frame("phone", "Những cuộc gọi", true));
+  body(s, ["Có những lúc người ta không cần một cuộc trò chuyện thật lớn để cảm nhận rằng ai đó đang hiện diện", "Đôi khi chỉ là được nghe giọng người mình thương, được trò chuyện về một ngày bình thường hoặc cùng nhau ở lại thêm một chút trong cuộc gọi", "Anh muốn giữ lại những điều nhỏ ấy, bởi chính những khoảnh khắc bình thường có thể trở thành những điều đáng nhớ nhất khi thời gian trôi qua"]);
+  const b = h("button", "btn", "Nghe lại giai điệu"); b.type = "button"; b.id = "listen"; b.classList.add("needmusic"); b.hidden = true; b.onclick = toggleAudio; s.appendChild(b);
+}
+function buildDistance() {
+  const s = section("distance", "a5", "Hồi II · The Part We Didn't Always Understand");
+  head(s, "", "NOT EVERY CHAPTER WAS EASY", "Những khoảng cách");
+  body(s, ["Không phải lúc nào chúng ta cũng hiểu rõ điều người kia đang nghĩ", "Có những giai đoạn khoảng cách xuất hiện, có những chuyện chưa được giải quyết, có những lúc chúng ta chưa biết phải tiếp tục thế nào", "Anh không muốn kể lại quá khứ để biến ai thành người có lỗi. Anh cũng không muốn giả vờ rằng tất cả đều dễ dàng", "Anh chỉ muốn nhìn lại bằng sự trưởng thành hơn, để hiểu bản thân và cách mình đối xử với người khác rõ ràng hơn"]);
+  const notes = { "Khoảng cách": "Có những lúc im lặng nhiều hơn lời nói — và cả hai đều chưa biết đặt nó ở đâu.", "Lắng nghe": "Học cách nghe điều người kia chưa nói hết, trước khi vội trả lời.", "Trưởng thành": "Nhìn lại không để trách ai, mà để lần sau nói rõ hơn và dịu dàng hơn." };
+  const note = h("div", "note", "Chạm vào một điểm trên con đường.");
+  const p = h("div", "pts rv"); Object.keys(notes).forEach(k => { const b = h("button", "pt", k); b.type = "button"; b.onclick = () => { p.querySelectorAll(".pt").forEach(x => x.classList.remove("on")); b.classList.add("on"); note.textContent = notes[k]; }; p.appendChild(b); });
+  s.append(p, note);
+}
+function buildReturn() {
+  const s = section("return", "a6", "Hồi II · The Return");
+  head(s, SITE_CONFIG.returnLabel, "KHI CHÚNG TA CÓ CƠ HỘI TÌM LẠI NHAU");
+  body(s, ["Có những lúc câu chuyện tưởng như đã đi đến một khoảng lặng", "Rồi cuộc trò chuyện lại có cơ hội bắt đầu, không phải để xóa hết những gì đã xảy ra, mà để hai người có thể nhìn nhau bằng một cách khác", "Trân đã quay lại và bày tỏ mong muốn tiếp tục có mặt trong cuộc sống của Tân", "Từ đó, hai người có thêm một cơ hội để trò chuyện, hiểu nhau và xem liệu có thể xây dựng một điều gì đó rõ ràng hơn hay không"]);
+  s.appendChild(h("div", "sig"));
+}
+function buildOfficial() {
+  const s = section("official", "a6", "Hồi II · September 15");
+  s.appendChild(h("div", "dots rv", "", [h("b"), h("b")]));
+  s.appendChild(h("div", "date-big rv", SITE_CONFIG.dates.officialLabel));
+  head(s, "", "WE CHOSE A NEW CHAPTER", "Ngày chúng ta chính thức gọi nhau là người yêu");
+  body(s, ["Ngày 22 tháng 10 năm 2025 là ngày chúng ta gặp nhau", "Sau nhiều tháng quen biết, qua những giai đoạn khác nhau, đến ngày 15 tháng 9 năm 2026, chúng ta chính thức trở thành người yêu", "Với anh, đó là một dấu mốc riêng. Không phải vì từ ngày ấy mọi chuyện sẽ tự nhiên hoàn hảo, mà vì chúng ta có một điểm bắt đầu rõ ràng hơn để cùng học cách giữ gìn mối quan hệ này"]);
+  const o = SITE_CONFIG.dates.official, d = Math.floor((new Date() - new Date(o[0], o[1], o[2])) / 864e5);
+  s.appendChild(h("p", "vi", d >= 0 ? "Đã " + d + " ngày kể từ ngày chính thức yêu nhau" : ""));
+  s.appendChild(h("p", "act", "Một năm kể từ ngày gặp nhau — hơn một tháng kể từ khi chính thức gọi nhau là người yêu"));
+  const b = h("button", "btn", "Mở chương tình yêu"); b.type = "button"; b.onclick = () => $("#small").scrollIntoView({ behavior: "smooth" }); s.appendChild(b);
+}
+function buildSmall() {
+  const s = section("small", "a7", "Hồi III · The Small Things That Became Ours");
+  head(s, "", "NHỮNG ĐIỀU NHỎ MÀ ANH KHÔNG MUỐN QUÊN");
+  const g = h("div", "cards rv"); SITE_CONFIG.small.forEach(([t, d]) => { const b = h("button", "card", t); b.type = "button"; b.onclick = () => openModal([h("h3", "", t), h("p", "", d)]); g.appendChild(b); });
+  s.appendChild(g);
+  const mem = h("div", "const rv"); SITE_CONFIG.memoryImages.forEach((n, i) => { const f = frame(n, "Ký ức " + (i + 1)); f.style.aspectRatio = "1"; f.onclick = () => zoom(f, "Ký ức " + (i + 1)); mem.appendChild(h("figure", "", "", [f])); }); s.appendChild(mem);
+}
+function buildGirl() {
+  const s = section("girl", "a7", "Hồi III · The Girl Behind The Memories");
+  head(s, "", "THERE IS STILL SO MUCH I WANT TO KNOW ABOUT YOU", "Ái Trân");
+  s.appendChild(frame("portrait", "Ái Trân"));
+  const z = h("div", "zones rv"); SITE_CONFIG.sides.forEach(([t, d]) => z.appendChild(h("div", "zone", "", [h("h3", "", t), h("p", "", d)]))); s.appendChild(z);
+  body(s, ["Anh không muốn yêu em chỉ bằng những điều anh đã biết", "Anh còn muốn tiếp tục tìm hiểu những sở thích mới, những ước mơ em sẽ có, những điều khiến em vui và cả những điều em cần thêm thời gian mới có thể chia sẻ", "Anh hy vọng theo thời gian, anh không chỉ nhớ cô gái mình gặp ngày hôm qua, mà còn có cơ hội hiểu thêm những phiên bản mới của em"]);
+}
+function buildSafe() {
+  const s = section("safe", "a5", "Hồi III · A Place Where We Can Be Ourselves");
+  head(s, "", "NƠI CẢ HAI ĐƯỢC LẮNG NGHE");
+  body(s, ["Anh biết em có những cảm xúc rất riêng và có những lúc em để tâm đến một điều nhỏ hơn những gì anh tưởng", "Anh không muốn em phải giấu đi những điều làm mình buồn chỉ vì sợ người khác nghĩ em nhạy cảm quá", "Anh cũng biết mình còn phải học cách lắng nghe rõ ràng hơn, giải thích tốt hơn và bình tĩnh hơn trong những lúc khó nói", "Anh không mong hai đứa mình từ nay không bao giờ hiểu lầm nhau. Anh mong rằng khi có điều gì không ổn, chúng ta có thể nói ra, nghe nhau và cùng tìm cách giải quyết mà không cần làm đối phương thấy mình nhỏ bé hơn", "Anh muốn em vẫn là chính em, có sở thích, có bạn bè, có những điều riêng để theo đuổi. Anh không muốn thế giới của em nhỏ lại chỉ để chứng minh rằng em thương anh", "Anh mong mình có thể trở thành một phần bình yên trong thế giới của nhau, nhưng vẫn dành cho nhau sự tự do và tôn trọng cần thiết"]);
+  const b = h("button", "btn", "Điều anh muốn em nhớ"); b.type = "button";
+  b.onclick = () => openModal([h("h3", "", "Điều anh muốn em nhớ"), h("p", "", "Em không cần phải hoàn hảo để xứng đáng được yêu thương"), h("p", "", "Anh cũng không cần phải luôn đúng mới có thể học cách trở thành một người yêu tốt hơn")]);
+  s.appendChild(b);
+}
+function buildFlower() {
+  const s = section("flower", "a6", "Hồi III · The First Flower Birtday Gift");
+  head(s, "08.10", "I LOVE YOU 3000", "Bó hoa những lời yêu thương và cùng em đón sinh nhật đầu tiên với tư cách người yêu của em");
+  s.appendChild(frame("flower", "Bó hoa"));
+  body(s, ["Có những lời yêu thương vốn vô hình, cho đến khi ta tìm được một cách nhỏ bé để đặt chúng vào tay người mình thương", "Ngày sinh nhật vừa rồi, anh đã có dịp tặng em bó hoa đầu tiên của anh với tư cách bạn trai của em. Anh nhớ rằng em đã đăng bó hoa cùng câu “I Love You 3000”", "Anh không nghĩ một bó hoa có thể nói thay tất cả những điều anh cảm nhận. Nhưng anh hy vọng khi nhìn lại, em vẫn nhớ rằng có một người muốn khiến ngày hôm ấy của em trở nên đặc biệt"]);
+}
+function buildMan() {
+  const s = section("man", "a5", "Hồi III · The Man I Am Trying To Become");
+  head(s, "", "NGƯỜI ANH ĐANG CỐ GẮNG TRỞ THÀNH");
+  body(s, ["Anh vẫn đang học cách xây dựng cuộc đời mình", "Anh muốn học thật chắc kiến thức chuyên môn, làm chủ backend, tìm hiểu an ninh mạng và tạo ra những sản phẩm thật sự hoạt động được", "Anh muốn tìm cơ hội thực tập và công việc phù hợp, trở nên độc lập hơn và có thể đỡ đần cha mẹ bằng khả năng của chính mình", "Anh muốn những điều mình nói về tương lai sẽ dần được thể hiện bằng những gì mình làm trong hiện tại"]);
+  const ul = h("ul", "goals rv"), saved = JSON.parse(safeStore.get(SITE_CONFIG.storeKey + "-goals") || "[]");
+  SITE_CONFIG.goals.forEach((g, i) => { const li = h("li", saved.includes(i) ? "done" : "", g); li.tabIndex = 0; const t = () => { li.classList.toggle("done"); safeStore.set(SITE_CONFIG.storeKey + "-goals", JSON.stringify([...ul.children].map((x, j) => x.classList.contains("done") ? j : -1).filter(j => j >= 0))); }; li.onclick = t; li.onkeydown = e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); t(); } }; ul.appendChild(li); });
+  s.appendChild(ul);
+}
+function buildFuture() {
+  const s = section("future", "a7", "Hồi III · The Future We May Build");
+  head(s, "", "TƯƠNG LAI ANH HY VỌNG CÓ THỂ CÙNG EM XÂY DỰNG");
+  const Z = [["The Days Ahead", ["Tiếp tục tạo những kỷ niệm mới", "Trò chuyện và chơi game cùng nhau", "Học cách nói rõ hơn khi có điều chưa hiểu", "Giữ lại các bức ảnh và lá thư"]], ["Growing Together", ["Mỗi người theo đuổi mục tiêu riêng", "Tôn trọng bạn bè, sở thích và không gian của nhau", "Giải quyết bất đồng bình tĩnh hơn", "Xây dựng lòng tin bằng hành động thực tế"]], ["One Day, Perhaps", ["Đây là mong muốn xa hơn của Tân, không phải cam kết ai đã đưa ra", "Một ngày cả hai nhìn lại quãng đường đã qua, khi vẫn tự nguyện lựa chọn nhau"]]];
+  const z = h("div", "zones rv"); Z.forEach(([t, l]) => { const u = h("ul"); l.forEach(x => u.appendChild(h("li", "", x))); z.appendChild(h("div", "zone", "", [h("h3", "", t), u])); }); s.appendChild(z);
+  s.appendChild(h("p", "vi rv", "Không dự đoán tương lai như một sự thật chắc chắn."));
+}
+function buildLetter() {
+  const s = section("letter", "a6", "Hồi III · The Letter");
+  const env = h("div", "envx", "", [h("div", "sheet"), h("div", "flap"), h("div", "lbl", "FOR ÁI TRÂN")]);
+  s.appendChild(h("div", "stage3 rv", "", [env]));
+  s.appendChild(h("p", "vi", "Written by Tân, on the day we look back at our first meeting."));
+  const rd = buildReader(), b = h("button", "btn", "Mở lá thư"); b.type = "button";
+  b.onclick = () => { env.classList.add("open"); b.disabled = true; setTimeout(() => { rd.open(); env.classList.remove("open"); b.disabled = false; }, fxoff() ? 0 : 1500); };
+  s.appendChild(b);
+}
+function buildReader() {
+  const r = h("div"); r.id = "reader"; r.setAttribute("role", "dialog"); r.setAttribute("aria-modal", "true");
+  const bar = h("div", "rbar"), sc = h("div", "rscroll"), paper = h("div", "paper");
+  const btn = (t, f, c) => { const b = h("button", "btn " + (c || "soft"), t); b.type = "button"; b.onclick = f; return b; };
+  paper.appendChild(h("h3", "", "Gửi cục vàng của anh, Ái Trân"));
+  SITE_CONFIG.letter.split("\n").forEach((t, i) => { const p = h("p", "", t); p.style.animationDelay = (i < 5 ? .5 + i * .9 : 5) + "s"; paper.appendChild(p); });
+  const sg = h("p", "sign", "Anh thương em, Ái Trân"); sg.style.animationDelay = "5s"; paper.appendChild(sg);
+  const replay = () => { paper.classList.remove("all"); paper.querySelectorAll("p,h3").forEach(e => { e.style.animation = "none"; void e.offsetWidth; e.style.animation = ""; }); sc.scrollTop = 0; };
+  const close = () => { r.classList.remove("open"); document.body.style.overflow = ""; };
+  const end = h("div", "rend", "", [h("p", "act", "THE NEXT PAGE IS WAITING FOR US")]);
+  end.append(btn("Đọc lại", replay), document.createTextNode(" "), btn("Viết tiếp", () => {
+    paper.animate([{ transform: "none", opacity: 1 }, { transform: "scale(.5) translateY(60px)", opacity: 0 }], { duration: fxoff() ? 1 : 600, easing: "ease-in" }).onfinish = () => { close(); wipe("#D6B887", () => jump($("#archive"))); };
+  }, ""));
+  sc.append(paper, end);
+  bar.append(btn("Bỏ qua hiệu ứng", () => paper.classList.add("all")), btn("Về đầu thư", () => sc.scrollTo({ top: 0, behavior: "smooth" })), btn("Đóng", close, ""));
+  r.append(bar, sc); document.body.appendChild(r);
+  document.addEventListener("keydown", e => { if (e.key === "Escape" && r.classList.contains("open")) close(); });
+  return { open() { replay(); r.classList.add("open"); document.body.style.overflow = "hidden"; } };
+}
+function buildFinale() {
+  const s = section("finale", "a7", "Hồi III · The Story Is Still Open");
+  const svg = '<svg class="reprise" viewBox="0 0 520 200" aria-hidden="true" fill="none" stroke="#D6B887" stroke-width="1"><circle class="t" style="--d:.3s" cx="40" cy="150" r="3" fill="#D6B887"/><g class="t" style="--d:.9s"><circle cx="100" cy="120" r="10"/><path d="M110 120h16M90 120h-14"/></g><g class="t" style="--d:1.5s"><rect x="150" y="96" width="26" height="18"/><rect x="156" y="102" width="26" height="18"/><rect x="162" y="108" width="26" height="18"/></g><path class="t" style="--d:2.1s" d="M215 100h30M225 108h30M215 116h22"/><g class="t" style="--d:2.7s" fill="#9C617D"><circle cx="290" cy="78" r="3"/><circle cx="305" cy="88" r="3"/><circle cx="320" cy="74" r="3"/></g><g class="t" style="--d:3.3s"><circle cx="360" cy="70" r="5"/><circle cx="360" cy="70" r="11"/><circle cx="360" cy="70" r="18"/></g><g class="t" style="--d:3.9s"><circle cx="410" cy="110" r="14" fill="#D6B887" fill-opacity=".25"/><circle cx="410" cy="110" r="5" fill="#9C617D"/></g><rect class="t" style="--d:4.5s" x="460" y="130" width="22" height="15"/><path class="hz" d="M10 175C140 170 300 160 510 115"/></svg>';
+  const w = h("div", "rv"); w.innerHTML = svg; s.appendChild(w);
+  s.append(h("h2", "rv", SITE_CONFIG.names), h("div", "date rv", "22.10.2025 — 22.10.2026"), h("p", "vi rv", "Một năm từ ngày gặp nhau. Một chương mới đã bắt đầu. Một tương lai vẫn đang mở."));
+  ["Chúng ta có một nơi để bắt đầu", "Chúng ta có những ký ức để giữ lại", "Và chúng ta vẫn còn những trang chưa viết"].forEach((t, i) => { const p = h("p", "lead rv", t); p.style.transitionDelay = (i * .8) + "s"; s.appendChild(p); });
+  s.appendChild(h("div", "blank rv", "THE NEXT CHAPTER IS YOURS TO WRITE"));
+  const w1 = h("button", "btn", "Viết tiếp câu chuyện"); w1.type = "button"; w1.onclick = () => $("#archive .pages").scrollIntoView({ behavior: "smooth" });
+  const r1 = h("button", "btn soft", "Đọc lại từ đầu"); r1.type = "button"; r1.onclick = () => wipe("#9C617D", () => jump($("#intro")));
+  const hg = h("button", "btn", "Gửi em một cái ôm 💗"); hg.type = "button";
+  hg.onclick = () => { const e = $("#hug"); e.classList.remove("go"); void e.offsetWidth; e.classList.add("go"); };
+  s.appendChild(h("div", "tools", "", [w1, r1, hg]));
+}
+/* ============ 6. JOURNAL (localStorage) ============ */
+let journal = {};
+function loadJournal() { try { journal = JSON.parse(safeStore.get(SITE_CONFIG.storeKey) || "{}") || {}; } catch (e) { journal = {}; } }
+function saveJournal() { return safeStore.set(SITE_CONFIG.storeKey, JSON.stringify(journal)); }
+function buildArchive() {
+  const s = section("archive", "a7", "Hồi III · The Living Archive");
+  head(s, "", "OUR UNWRITTEN CHAPTERS", "Một cuốn nhật ký chưa hoàn thành");
+  s.appendChild(h("p", "vi", "Những khoảng trống dành cho tương lai — chưa phải sự kiện đã xảy ra. Nội dung chỉ lưu trên trình duyệt này, không tự đồng bộ giữa các thiết bị."));
+  const grid = h("div", "pages"); s.appendChild(grid);
+  const render = () => { grid.replaceChildren(); SITE_CONFIG.unwritten.forEach((t, i) => { const e = journal[i]; const b = h("button", "page" + (e ? " filled" : ""), e && e.title ? e.title : t); b.type = "button"; if (e && e.date) b.appendChild(h("small", "", e.date)); b.onclick = () => editPage(i, render); grid.appendChild(b); }); };
+  render();
+  const tools = h("div", "tools"); tools.style.marginTop = "1.5rem";
+  const ex = h("button", "btn soft", "Xuất sao lưu"); ex.type = "button";
+  ex.onclick = () => { const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([JSON.stringify(journal, null, 2)], { type: "application/json" })); a.download = "our-unwritten-chapters.json"; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 2000); };
+  const im = h("button", "btn soft", "Nhập sao lưu"); im.type = "button";
+  const fi = document.createElement("input"); fi.type = "file"; fi.accept = "application/json"; fi.hidden = true;
+  fi.onchange = () => { const r = new FileReader(); r.onload = () => { try { const d = JSON.parse(r.result); if (d && typeof d === "object") { Object.keys(d).forEach(k => { const v = d[k]; if (v && typeof v === "object") journal[k] = { title: String(v.title || ""), date: String(v.date || ""), text: String(v.text || "") }; }); saveJournal(); render(); } } catch (e) { openModal([h("p", "", "Tệp sao lưu không hợp lệ.")]); } }; r.readAsText(fi.files[0]); };
+  im.onclick = () => fi.click(); tools.append(ex, im, fi); s.appendChild(tools);
+}
+function editPage(i, done) {
+  const cur = journal[i] || { title: "", date: "", text: "" };
+  const ti = h("input"); ti.placeholder = "Tiêu đề"; ti.value = cur.title; ti.maxLength = 100;
+  const da = h("input"); da.type = "date"; da.value = /^\d{4}-\d\d-\d\d$/.test(cur.date) ? cur.date : "";
+  const tx = h("textarea"); tx.placeholder = SITE_CONFIG.unwritten[i]; tx.value = cur.text;
+  const msg = h("p", "vi"); const row = h("div", "tools");
+  const sv = h("button", "btn", "Lưu"); sv.type = "button";
+  sv.onclick = () => { journal[i] = { title: ti.value.trim(), date: da.value, text: tx.value }; if (saveJournal()) { done(); closeModal(); } else msg.textContent = "Trình duyệt không cho lưu trữ — nội dung chỉ giữ đến khi tải lại trang."; };
+  row.appendChild(sv);
+  if (journal[i]) { const d = h("button", "btn soft", "Xóa"); d.type = "button"; d.onclick = () => { if (confirm("Xóa trang này?")) { delete journal[i]; saveJournal(); done(); closeModal(); } }; row.appendChild(d); }
+  openModal([h("h3", "", SITE_CONFIG.unwritten[i]), ti, da, tx, msg, row]);
+}
+/* ============ 7. AUDIO PLAYER ============ */
+const bgm = $("#bgm"); let mp = null;
+const reduced = matchMedia("(prefers-reduced-motion:reduce)").matches;
+const fxoff = () => document.body.classList.contains("fx-off");
+const fmt = t => isFinite(t) && t >= 0 ? Math.floor(t / 60) + ":" + String(Math.floor(t % 60)).padStart(2, "0") : "--:--";
+function showMusicUI(ok) { document.querySelectorAll(".needmusic").forEach(e => e.hidden = !ok); if (mp) mp.classList.toggle("na", !ok); }
+function playAudio() { if (!bgm.src) return; const p = bgm.play(); if (p && p.catch) p.catch(() => {}); }
+function toggleAudio() { if (!mp || mp.classList.contains("na")) return; mp.classList.add("open"); bgm.paused ? playAudio() : bgm.pause(); }
+function buildPlayer() {
+  mp = h("div"); mp.id = "mp"; mp.classList.add("na");
+  mp.innerHTML = '<div class="mpp" role="group" aria-label="Trình phát nhạc"><div class="mpt">OUR LITTLE UNIVERSE</div><div class="mps">A soundtrack for our memories</div><div class="mpw"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="mpr"><button class="mpc" data-a="play" type="button" aria-label="Phát hoặc tạm dừng">▶</button><input type="range" min="0" max="1000" value="0" data-a="seek" aria-label="Thời gian"></div><div class="mpd"><span data-a="cur">0:00</span><span data-a="dur">--:--</span></div><div class="mpr"><button class="mpc sm" data-a="mute" type="button" aria-label="Tắt hoặc bật tiếng">🔊</button><input type="range" min="0" max="100" value="80" data-a="vol" aria-label="Âm lượng"><button class="mpc sm" data-a="close" type="button" aria-label="Đóng">×</button></div></div><button class="mpb" type="button" aria-label="Mở trình phát nhạc">♪</button>';
+  document.body.appendChild(mp);
+  const q = a => mp.querySelector('[data-a="' + a + '"]'), mpb = mp.querySelector(".mpb");
+  const upd = () => { const pl = !bgm.paused; document.body.classList.toggle("playing", pl); q("play").textContent = pl ? "❚❚" : "▶"; mpb.textContent = pl ? "♫" : "♪"; };
+  ["play", "pause", "ended"].forEach(ev => bgm.addEventListener(ev, upd));
+  bgm.addEventListener("timeupdate", () => { q("cur").textContent = fmt(bgm.currentTime); if (isFinite(bgm.duration) && document.activeElement !== q("seek")) q("seek").value = bgm.currentTime / bgm.duration * 1000; });
+  const meta = () => { if (isFinite(bgm.duration)) { q("dur").textContent = fmt(bgm.duration); showMusicUI(true); } };
+  bgm.addEventListener("loadedmetadata", meta); bgm.addEventListener("durationchange", meta);
+  bgm.addEventListener("error", () => { showMusicUI(false); console.warn("music.mp3 không khả dụng"); });
+  q("play").onclick = () => bgm.paused ? playAudio() : bgm.pause();
+  q("seek").oninput = e => { if (isFinite(bgm.duration)) bgm.currentTime = e.target.value / 1000 * bgm.duration; };
+  q("mute").onclick = () => { bgm.muted = !bgm.muted; q("mute").textContent = bgm.muted ? "🔇" : "🔊"; };
+  q("vol").oninput = e => { bgm.volume = e.target.value / 100; };
+  bgm.volume = .8;
+  mpb.onclick = () => { mp.classList.toggle("open"); mpb.setAttribute("aria-expanded", mp.classList.contains("open")); };
+  q("close").onclick = () => mp.classList.remove("open");
+  document.addEventListener("click", e => { if (mp.classList.contains("open") && !mp.contains(e.target) && e.target.id !== "listen") mp.classList.remove("open"); });
+  bgm.preload = "metadata"; bgm.src = SITE_CONFIG.music; meta();
+}
+/* ============ 8. MOTION SYSTEM ============ */
+const GLOW = { freefire: "#111524", discord: "#1c1b3f", zalo: "#24162D", mess: "#2a1838", social: "#1a1730", phone: "#2b1a33", distance: "#14141c", "return": "#3a1a2c", kinetic: "#12121f", official: "#501D36", timeline: "#1b1830", small: "#24162D", girl: "#2a1730", safe: "#141322", flower: "#5a2236", man: "#101526", future: "#1b1830", letter: "#3a1a2c", archive: "#24162D", finale: "#12111f" };
+const BEAM = { freefire: ["#D6B887", "r", 1600], discord: ["#8b8dff", "v", 1400], zalo: ["#9C617D", "l", 1800], mess: ["#c79bd6", "r", 1200], social: ["#D6B887", "v", 1000], phone: ["#D6B887", "l", 2000], distance: ["#8F95A7", "r", 2400], "return": ["#D6B887", "v", 2200] };
+let gi = 0, lastGlow = "";
+function setGlow(c) { if (!c || c === lastGlow) return; lastGlow = c; const n = $(gi ? "#glowA" : "#glowB"); n.style.background = "radial-gradient(ellipse at 50% 45%," + c + ",var(--bg) 78%)"; n.style.opacity = 1; $(gi ? "#glowB" : "#glowA").style.opacity = 0; gi ^= 1; }
+function jump(el) { const r = document.documentElement; r.style.scrollBehavior = "auto"; el.scrollIntoView(); r.style.scrollBehavior = ""; }
+function wipe(color, cb) {
+  if (fxoff() || reduced) { cb(); return; }
+  const w = $("#wipe"); w.style.background = "linear-gradient(90deg,var(--bg) 60%," + color + ")";
+  w.animate([{ transform: "translateX(-101%)" }, { transform: "translateX(0)", offset: .45 }, { transform: "translateX(101%)" }], { duration: 1100, easing: "cubic-bezier(.6,0,.3,1)" });
+  setTimeout(cb, 500);
+}
+function beam(sec) {
+  if (sec._b || fxoff() || reduced) return; sec._b = 1;
+  const m = BEAM[sec.id] || ["#D6B887", "r", 1400], b = h("div", "beam"), v = m[1] === "v";
+  b.style.setProperty("--bc", m[0]);
+  b.style.cssText += v ? ";width:1px;height:60%;left:50%;background:linear-gradient(transparent," + m[0] + ",transparent)" : ";width:60%;background:linear-gradient(90deg,transparent," + m[0] + ",transparent)";
+  sec.prepend(b);
+  const kf = v ? [{ opacity: 0, transform: "translateY(-100%)" }, { opacity: 1, offset: .3 }, { opacity: 0, transform: "translateY(170%)" }]
+    : [{ opacity: 0, transform: m[1] === "l" ? "translateX(170%)" : "translateX(-100%)" }, { opacity: 1, offset: .3 }, { opacity: 0, transform: m[1] === "l" ? "translateX(-100%)" : "translateX(170%)" }];
+  b.animate(kf, { duration: m[2], easing: "cubic-bezier(.4,0,.2,1)" }).onfinish = () => b.remove();
+}
+let lblT = 0;
+function label(s) { const a = s.querySelector(".act"), l = $("#chlabel"); if (!a || !a.textContent) return; l.textContent = a.textContent; l.classList.add("show"); clearTimeout(lblT); lblT = setTimeout(() => l.classList.remove("show"), 2400); }
+function tlUpdate() {
+  const tl = $(".tl"); if (!tl) return;
+  const r = tl.getBoundingClientRect(), fill = Math.max(0, Math.min(r.height, innerHeight * .65 - r.top));
+  $(".tlf").style.height = fill + "px";
+  tl.querySelectorAll(".tn").forEach(n => n.classList.toggle("on", n.offsetTop < fill - 10));
+}
+function particles() {
+  const cv = $("#pt"), cx = cv.getContext && cv.getContext("2d"); if (!cx || reduced) return;
+  let w, hh, raf = 0; const N = innerWidth < 700 ? 14 : 34, ps = [];
+  const rs = () => { w = cv.width = innerWidth; hh = cv.height = innerHeight; }; rs(); addEventListener("resize", rs);
+  for (let i = 0; i < N; i++) ps.push({ x: Math.random() * w, y: Math.random() * hh, r: Math.random() * 1.4 + .4, v: Math.random() * .25 + .05, a: Math.random() * .5 + .2 });
+  const tick = () => {
+    cx.clearRect(0, 0, w, hh); if (fxoff()) return;
+    cx.fillStyle = "#D6B887"; ps.forEach(p => { p.y -= p.v; if (p.y < -4) { p.y = hh + 4; p.x = Math.random() * w; } cx.globalAlpha = p.a; cx.beginPath(); cx.arc(p.x, p.y, p.r, 0, 6.3); cx.fill(); });
+    raf = requestAnimationFrame(tick);
+  };
+  document.addEventListener("visibilitychange", () => { cancelAnimationFrame(raf); document.body.classList.toggle("tabhid", document.hidden); if (!document.hidden) tick(); });
+  tick();
+}
+function initFx() {
+  document.querySelectorAll(".frame").forEach(f => f.classList.add("rv"));
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .12 });
+  document.querySelectorAll(".rv").forEach(e => io.observe(e));
+  const so = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return; const s = e.target;
+    setGlow(GLOW[s.id]); if (s.id === "finale") s.classList.add("go"); if (s.id !== "intro") { beam(s); label(s); }
+  }), { rootMargin: "-40% 0px -40% 0px", threshold: 0 });
+  document.querySelectorAll("main>section").forEach(s => so.observe(s));
+  const pr = $("#prog"), fr = [...document.querySelectorAll(".frame")], par = !reduced && innerWidth >= 760; let q = 0;
+  const run = () => {
+    q = 0; const m = document.documentElement.scrollHeight - innerHeight; pr.style.width = (m > 0 ? scrollY / m * 100 : 0) + "%"; tlUpdate();
+    if (par && !fxoff()) fr.forEach(f => { const r = f.getBoundingClientRect(); if (r.bottom < 0 || r.top > innerHeight) return; f.style.translate = "0 " + ((r.top + r.height / 2 - innerHeight / 2) * -.07).toFixed(1) + "px"; });
+  };
+  addEventListener("scroll", () => { if (!q) q = requestAnimationFrame(run); }, { passive: true }); run();
+  $("#skipfx").onclick = () => { document.body.classList.add("fx-off"); document.querySelectorAll(".rv").forEach(e => e.classList.add("in")); $("#intro").classList.add("skip"); $("#skipfx").hidden = true; };
+  if (reduced) document.body.classList.add("fx-off");
+  particles();
+  /* chốt an toàn: sau 2 giây tự tải mọi ảnh dù observer có báo hay không */
+  setTimeout(() => document.querySelectorAll(".frame").forEach(f => { if (f._load) f._load(); }), 2000);
+  /* chốt an toàn cho phần hiện dần: nếu sau 6 giây vẫn còn khung chưa hiện thì hiện luôn */
+  setTimeout(() => document.querySelectorAll(".frame.rv:not(.in)").forEach(f => { const r = f.getBoundingClientRect(); if (r.top < innerHeight && r.bottom > 0) f.classList.add("in"); }), 6000);
+}
+/* ============ 9. INIT ============ */
+function init() {
+  loadJournal(); buildIntro();
+  SITE_CONFIG.chapters.slice(0, 1).forEach(buildChapter);
+  SITE_CONFIG.chapters.slice(1).forEach(buildChapter);
+  buildSocial(); buildPhone(); buildDistance(); buildReturn(); buildKinetic(); buildOfficial(); buildTimeline(); buildSmall(); buildGirl(); buildSafe(); buildFlower(); buildMan(); buildFuture(); buildLetter(); buildArchive(); buildFinale();
+  buildPlayer(); initFx();
+}
+try { init(); } catch (e) { console.error(e); }
+</script>
+<footer class="end" id="last">Và câu chuyện của chúng ta vẫn còn những trang chưa viết…</footer>
+</body>
+</html>
